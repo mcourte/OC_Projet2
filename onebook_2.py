@@ -4,7 +4,6 @@ from bs4 import BeautifulSoup
 import csv
 import pandas as pd
 
-import onecategory
 
 
 #Objectif : récuperer tous les informations d'un livre
@@ -23,7 +22,7 @@ def extraire_donnees(elements):
 
     return resultat
 
-#Adresse URL
+#Adresse URL de tous les livres
 with open('urls.txt', 'r') as file:
     for row in file:
         list_url=[row]
