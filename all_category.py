@@ -28,11 +28,17 @@ if response.ok:
     soup = BeautifulSoup(response.text, 'lxml')
     if response.ok :
         soup = BeautifulSoup(response.text, 'lxml')
-        uls = soup.find_all('ul', class_='nav nav-list')
-        for ul in uls:
-            a=ul.find('a')['href']
-        print(a)
+        ul = soup.find('ul', class_='nav nav-list')
+        cat_ul=ul.find('ul')
+        list_cat=cat_ul.findAll('li')
+        for li in list_cat:
+            a=li.find('a')['href']
+            a_list.append(url + a)
+
+
+#Création d'un fichier texte avec l'ensemble des URLS des catégories
+with open('all_urls.txt', 'w') as file:
+    for a in a_list:
+        file.write(a +'\n')   #le +'\n` permet de passer à la ligne entre chaque nouveau lien      
        
-#Création fichier .csv, avec comme nom "all_cat_urls.csv", en utilisant un dataframe
-df = pd.DataFrame.from_dict(links) 
-df.to_csv (r'all_cat_urls.csv', index=False, header=False)
+
