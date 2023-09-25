@@ -3,6 +3,10 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 import pandas as pd
+from PIL import Image
+import os
+import urllib
+import shutil
 
 #Objectif : récuperer tous les informations d'un livre
 
@@ -22,7 +26,7 @@ def extraire_donnees(elements):
 
 #Adresse URL
 
-url ='http://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html'
+url ='http://books.toscrape.com/catalogue/1st-to-die-womens-murder-club-1_2/index.html'
 
 #Début programme
 
@@ -68,8 +72,7 @@ review_rating=''.join(rating_dict[ele] for ele in review_rating.split()) #permet
 
 
 #Récupérer la description du livre
-description=soup.find(class_="product_page").findAll('p')[-1].get_text() #récupère le dernier élement p de la class product_page
-
+description=soup.find(class_="product_page").find('p', class_=None) #récupère le dernier élement p de la class product_page
 #Création d'un dictionnaire pour stocker l'ensemble des éléments à récupérer
 
 book_data = {
@@ -81,7 +84,6 @@ book_data = {
     }
 
 book_data.update(product_informations) #utilisation de la fonction update pour joindre le dictionnaire des élements contenu dans product_informations 
-
 
 
 #Création fichier .csv, avec comme nom "booktoscrape.csv", en utilisant un dataframe

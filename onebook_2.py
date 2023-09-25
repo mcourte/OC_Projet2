@@ -1,7 +1,6 @@
 # Package importés
 import requests
 from bs4 import BeautifulSoup
-import csv
 import pandas as pd
 
 
@@ -14,6 +13,7 @@ import pandas as pd
 td_list=[]
 th_list=[]
 li_list=[]
+
 
 def extraire_donnees(elements):
     resultat=[]
@@ -28,11 +28,12 @@ with open('urls.txt', 'r') as file:
         list_url=[row]
 
 #Début programme
-for element in list_url :
-    response = requests.get(element)
+for url in list_url :
+    response = requests.get(url)
     if response.ok:
         soup = BeautifulSoup(response.text, "lxml")
-
+        #URL
+        url=str(url)
         # Récupérer informations du Titre
         title=soup.find('h1').get_text()   #get_text() permet de récupérer le texte sans les balises
 
@@ -72,25 +73,26 @@ for element in list_url :
 
         #Récupérer la description du livre
         description=soup.find(class_="product_page").findAll('p')[-1].get_text() #récupère le dernier élement p de la class product_page
+        if description==True :
+            description=description.get_text()
 
         #Création d'un dictionnaire pour stocker l'ensemble des éléments à récupérer
 
         book_data = {
             "Categorie" : category,
-            "Url": list_url,
+            "URL": url,
             "Titre": title,
             "Description" : description,
             "Note /5": review_rating,
-            }
+                    }
 
         book_data.update(product_informations) #utilisation de la fonction update pour joindre le dictionnaire des élements contenu dans product_informations 
-
-
-    
-#Création fichier .csv, avec comme nom "booktoscrape.csv", en utilisant un dataframe
-df = pd.DataFrame(book_data, index=[0])
-df=df.reindex(('URL','UPC','Titre','Price (incl. tax)','Price (excl. tax)','Availability','Description','Categorie','Note /5'),axis=1)  #permet de réorganiser la liste des colonnes (axis =0 : lignes , axis=1 : colonnes)
-df.to_csv (r'booktoscrape_cat.csv', index=False, header=True)  #index = False : ici, je n'ai pas de "titre" de ligne, header=True : je veux afficher les en-têtes des colonnes
+        
+            
+        #Création fichier .csv, avec comme nom "booktoscrape.csv", en utilisant un dataframe
+        df = pd.DataFrame(book_data, index=[0])
+        df=df.reindex(('URL','UPC','Titre','Price (incl. tax)','Price (excl. tax)','Availability','Description','Categorie','Note /5'),axis=1)  #permet de réorganiser la liste des colonnes (axis =0 : lignes , axis=1 : colonnes)
+        df.to_csv (r'booktoscrape_cat.csv', index=False, header=True)  #index = False : ici, je n'ai pas de "titre" de ligne, header=True : je veux afficher les en-têtes des colonnes
 
     
 
