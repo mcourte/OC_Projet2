@@ -4,30 +4,21 @@ import os
 import pandas as pd
 import time
 
-import folder_by_categories
-import all_categories
-import urls_by_category_test
-import extraire_données
-import all_pictures
 
+import all_categories
+import urls_by_category
+import extraire_donnees
+import all_pictures
+import folder_by_categories
 
 start=time.time()
 #Adresse URL
 
 url ='http://books.toscrape.com/'
 
+#Création de tous les dossiers
 
 folder_by_categories.create_folder_category(url)
-
-all_categories.all_cat_urls(url)
-
-
-with open('all_cat_urls.txt','r') as file:
-    list_urls = [row.strip() for row in file]
-    for url in list_urls:
-        urls_by_category_test.url_by_category(url)
-
-
 
 #Création d'un DataFrame vide
 
@@ -38,35 +29,53 @@ df=df.reindex(('URL','UPC','Titre','Price (incl. tax)','Price (excl. tax)','Avai
 #Ici on réorganise les colonnes car l'odre des items dans le dictionnaire créer dans "extraire données" n'est pas le bon 
 
 # Adresse URL de tous les livres
-with open('all_cat_urls.txt','r') as file:
-        list_urls = [row.strip() for row in file]
 
-        for url in list_urls:
+urls_cat=all_categories.all_cat_urls(url)
+
+#Création d'un dictionnaire avec en key les listes de catégories et en value les urls correspondantes
+for url in urls_cat:
+    name_cat=url.replace('http://books.toscrape.com/catalogue/category/books/','').split('_')[0]
+    list='list_' + name_cat
+    urls=[]
+    urls=urls_by_category.url_by_category(url)
+    urls_by_cat={list:urls}
+    
+
+#Extraire données
+    
+    for value in urls_by_cat.values():
+        list_url=[]
+        list_url.append(value)
+        for url in list_url:
             df.drop(df.index, inplace=True)
-            response = requests.get(url)
-            if response.ok:
-                soup = BeautifulSoup(response.text, 'lxml')
-                name_cat=url.replace('http://books.toscrape.com/catalogue/category/books/','').split('_')[0]
-            with open('%s_urls.txt' %name_cat,'r') as file:
-                list_urls = [row.strip() for row in file]
-                 #Extraire données
-                for url in list_urls :
-                    books_data=extraire_données.extraire_donnees(url)
-                    books_data.update(books_data)
+            for i in url :
+                response = requests.get(i)
+                if response.ok:
+                    books_data=extraire_donnees.extraire_donnees(i)
                     df=pd.concat([df, pd.DataFrame([books_data])],ignore_index=True) #On ajoute dans le DF vide toutes les lignes correspondant à chaque URL sans ré-écrire l'index à chaque fois
-                    os.chdir('Catégories/%s' %name_cat) #On se place dans le dossier correspondant à la catégorie
+                    os.chdir('%s' %name_cat) #On se place dans le dossier correspondant à la catégorie
                     df.to_csv ('data_books.csv', index=False) #On créer le fichier .csv correspondant au DF
                     os.chdir(os.pardir) #On sort du dossier de la catégorie
-                    os.chdir(os.pardir) #On sort du dossier catégorie
-print(time.time()-start)
- 
- 
-with open('all_cat_urls.txt','r') as file:
-        list_urls = [row.strip() for row in file]
-        for url in list_urls:
-            all_pictures.pictures_by_category(url)
-print(time.time()-start)      
-for name in name_cat:
-    os.remove('%s_urls.txt' %name_cat) #Permet de supprimer les fichiers .txt de chaque catégorie
 
-print(time.time()-start)
+#Enregistrer les photos associées à chaque livre
+
+    for value in urls_by_cat.values():
+        list_url=[]
+        list_url.append(value)
+        for url in list_url:
+            os.mkdir('%s/Images' %name_cat)           # création des dossiers par nom de catégories
+            os.chdir('%s/Images' %name_cat)                  #on se place dans le dossier de la catégorie
+            for i in url:   
+                all_pictures.pictures_by_category(i)
+            os.chdir(os.pardir) # on sort du dossier name_cat
+            os.chdir(os.pardir)
+
+                    
+
+end_time=(time.time()-start)
+
+print(end_time)
+
+
+
+

@@ -1,8 +1,6 @@
 
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
-
 
 
 #Definition d'une fonction permettant de récupérer les URL de chaque catégorie
@@ -22,11 +20,11 @@ def all_cat_urls(url):
             for li in list_cat:
                 a=li.find('a')['href'].replace("index.html","")  #permet de récupérer le href de chacun des a
                 a_list.append(url + a)  #permet de concaténer l'url de base + les href qu'on a récupéré
-                
-
+        return a_list  
+    
 
     #Création d'un fichier texte avec l'ensemble des URLS des catégories
-    with open('all_cat_urls.txt', 'w') as file:
-        for a in a_list:
-            file.write(a +'\n')   #le +'\n` permet de passer à la ligne entre chaque nouveau lien      
+    #with open('all_cat_urls.txt', 'w') as file:
+    #    for a in a_list:
+    #       file.write(a +'\n')   #le +'\n` permet de passer à la ligne entre chaque nouveau lien      
 

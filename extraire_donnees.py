@@ -1,8 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-import urllib
-import os
 
 
 # Fonction pour extraire les données d'une page
@@ -69,7 +67,6 @@ def extraire_donnees(url):
     }
 
     book_data.update(product_informations)
-    books_data.update(book_data)
+    books_data.update(book_data)    
     return books_data 
-
 

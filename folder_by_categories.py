@@ -12,8 +12,8 @@ import os
 
 def create_folder_category(url) :
 
-    if not os.path.exists('Categories'):
-        os.mkdir('Catégories')
+    #if not os.path.exists('Categories'):
+    #    os.mkdir('Catégories')
     response = requests.get(url)
     if response.ok:
         soup = BeautifulSoup(response.text, 'lxml')
@@ -26,8 +26,8 @@ def create_folder_category(url) :
                 a=li.find('a')['href'].replace('index.html','')  #permet de récupérer le href de chacun des a
                 name_cat=a.replace('catalogue/category/books/','').split('_')[0] #permet de récupérer le nom de la catégorie
                 for name in name_cat:                   #Pour chaque nom de catégorie : création d'un dossier si il n'est pas déjà existant
-                    if not os.path.exists('Catégories/%s' %name_cat) :  
-                        os.makedirs('Catégories/%s' %name_cat)
+                    if not os.path.exists('%s' %name_cat) :  
+                        os.makedirs('%s' %name_cat)
 
 
 
