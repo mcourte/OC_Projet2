@@ -3,7 +3,7 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-
+import all_categories
 
 
 
@@ -43,8 +43,7 @@ def url_by_category(url):
                         link_c='http://books.toscrape.com/catalogue/' + link
                         while link_c not in links:
                             links.append(link_c)
+        return links
 
-            with open("%s_urls.txt"%name_cat, 'w') as file:
-                for link in links:
-                  file.write(link +'\n')  
-            
+
+
