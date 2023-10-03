@@ -1,0 +1,6 @@
+# Ignorer le répertoire de l'environnement virtuel
+/env/
+
+#Ignorer dossier
+/__pycache__/
+/.ipybn_checkpoints/
