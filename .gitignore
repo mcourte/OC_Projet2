@@ -4,3 +4,6 @@
 #Ignorer dossier
 /__pycache__/
 /.ipybn_checkpoints/
+
+#Ignorer dossier Data
+/Data.zip/
