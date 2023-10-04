@@ -3,7 +3,7 @@
 ## Etape 1 : Télécharger le code
 
 Cliquer sur le bouton vert "<> Code" puis sur Download ZIP.  
-Extraier l'ensemble des éléments dans le dossier dans lequel vous voulez stockez les datas qui seront téléchargées.  
+Extraire l'ensemble des éléments dans le dossier dans lequel vous voulez stockez les datas qui seront téléchargées.  
 
 ## Etape 2 ; Installer Python et ouvrir le terminal de commande
 
