@@ -33,15 +33,17 @@ df=df.reindex(('URL','UPC','Titre','Price (incl. tax)','Price (excl. tax)','Avai
 urls_cat=all_categories.all_cat_urls(url)
 
 #Création d'un dictionnaire avec en key les listes de catégories et en value les urls correspondantes
+
+#Faire fonction avec urls_by_cat en return
 for url in urls_cat:
     name_cat=url.replace('http://books.toscrape.com/catalogue/category/books/','').split('_')[0]
     list='list_' + name_cat
     urls=[]
     urls=urls_by_category.url_by_category(url)
     urls_by_cat={list:urls}
-    
+   
 
-#Extraire données
+#Faire fonction Extraire données
     
     for value in urls_by_cat.values():
         list_url=[]
@@ -54,20 +56,20 @@ for url in urls_cat:
                     books_data=extraire_donnees.extraire_donnees(i)
                     df=pd.concat([df, pd.DataFrame([books_data])],ignore_index=True) #On ajoute dans le DF vide toutes les lignes correspondant à chaque URL sans ré-écrire l'index à chaque fois
                     os.chdir('%s' %name_cat) #On se place dans le dossier correspondant à la catégorie
-                    df.to_csv ('data_books.csv', index=False) #On créer le fichier .csv correspondant au DF
+                    df.to_csv ('data_books.csv', encoding='utf-8', index=False) #On créer le fichier .csv correspondant au DF
                     os.chdir(os.pardir) #On sort du dossier de la catégorie
-
-#Enregistrer les photos associées à chaque livre
+                else : print('Erreur.....')
+#Faire fonction Enregistrer les photos associées à chaque livre
 
     for value in urls_by_cat.values():
         list_url=[]
         list_url.append(value)
         for url in list_url:
-            os.mkdir('%s/Images' %name_cat)           # création des dossiers par nom de catégories
-            os.chdir('%s/Images' %name_cat)                  #on se place dans le dossier de la catégorie
+            os.mkdir('%s/Images' %name_cat)           # création du dossier Images de catégories
+            os.chdir('%s/Images' %name_cat)                  #on se place dans le dossier Images de la catégorie
             for i in url:   
                 all_pictures.pictures_by_category(i)
-            os.chdir(os.pardir) # on sort du dossier name_cat
+            os.chdir(os.pardir) # on sort du dossier Images
             os.chdir(os.pardir)
 
                     

@@ -22,9 +22,5 @@ def all_cat_urls(url):
                 a_list.append(url + a)  #permet de concaténer l'url de base + les href qu'on a récupéré
         return a_list  
     
-
-    #Création d'un fichier texte avec l'ensemble des URLS des catégories
-    #with open('all_cat_urls.txt', 'w') as file:
-    #    for a in a_list:
-    #       file.write(a +'\n')   #le +'\n` permet de passer à la ligne entre chaque nouveau lien      
+  
 

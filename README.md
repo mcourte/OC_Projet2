@@ -16,12 +16,17 @@ Pour les utilisateurs de Linux : ouvrez directement le terminal de commande
 
 ## Etape 3 : Création de l'environnement virtuel
 
+Se placer dans le dossier où l'on a extrait l'ensemble des documents grâce à la commande ``cd``
+Exemple :
+```
+cd home/magali/OpenClassrooms/Formation/Projet_2
+```
+
+
 Dans le terminal de commande, executer la commande suivante :
 ```
 python3 -m venv env
 ```
-
-Placer vous dans cet environnement virtuel :
 
 
 Activez l'environnement virutel

@@ -7,6 +7,7 @@ import pandas as pd
 def extraire_donnees(url):
     td_list = []
     th_list = []
+    book_data={}
     books_data={}
     
     response = requests.get(url)
