@@ -5,9 +5,6 @@ from bs4 import BeautifulSoup
 
 
 
-
-
-
 #Définition d'une fonction permettant de récupérer les URL de tous les livres d'une catégories et de l'enregistrer dans un fichier 
 
 def url_by_category(url):
@@ -45,7 +42,7 @@ def url_by_category(url):
                                 links.append(link_c)
     except requests.exceptions.RequestException as error :
         print(f"Une erreur s'est produite :{error}")  
-        
+
     return links
 
 

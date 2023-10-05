@@ -1,7 +1,9 @@
+#Packages importés
+
 import requests
 from bs4 import BeautifulSoup
 import urllib
-import os
+
 
 #Objectif : récuperer les images des livres d'une catégorie
 
