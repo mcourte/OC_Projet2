@@ -1,19 +1,21 @@
-import sys
+#Packages importés
 import time
 
-
+#Modules importés
 import folder_by_categories
 import extract_data
 import extract_pict
 import choix_categories
 
+
+#Fonction permettant de convertir le temps d'exécution de secondes en HH:MM:SS
 def convert(seconds):
     min, sec = divmod(seconds, 60)
     hour, min = divmod(min, 60)
     return '%d:%02d:%02d' % (hour, min, sec)
 
 
-
+#Fonction principale du programme
 def main ():
     url_base = "http://books.toscrape.com/"
     while True:
