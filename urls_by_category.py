@@ -2,7 +2,6 @@
 
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
 
 
 
@@ -15,34 +14,38 @@ def url_by_category(url):
     name_cat=[]
     links=[]
 
- 
-    response = requests.get(url)
-    if response.ok:
-        soup = BeautifulSoup(response.text, 'lxml')
-        name_cat=url.replace('http://books.toscrape.com/catalogue/category/books/','').split('_')[0]
-        for name in name_cat:
-            h3s = soup.findAll('h3')
-            for h3 in h3s :
-                a=h3.find('a')   #on cherche tous les liens compris dans les "h3"
-                link= a['href'].replace("../../../","")   #permet de supprimer les "../.." en début de chaque lien contenu dans h3
-                link_c='http://books.toscrape.com/catalogue/' + link
-                while link_c not in links:
-                    links.append(link_c)
-            next_page = soup.find('li', class_='next')
-            if next_page:
-                next_url = next_page.find('a')['href']
-                url = url.rsplit('/', 1)[0] + '/' + next_url  # Construire le nouvel URL de la page suivante
-                response = requests.get(url)
-                if response.ok:
-                    soup = BeautifulSoup(response.text, "lxml")
-                    h3s = soup.findAll('h3')
-                    for h3 in h3s :
-                        a=h3.find('a')   
-                        link= a['href'].replace("../../../","")
-                        link_c='http://books.toscrape.com/catalogue/' + link
-                        while link_c not in links:
-                            links.append(link_c)
-        return links
-
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        response = requests.get(url)
+        if response.ok:
+            soup = BeautifulSoup(response.text, 'lxml')
+            name_cat=url.replace('http://books.toscrape.com/catalogue/category/books/','').split('_')[0]
+            for name in name_cat:
+                h3s = soup.findAll('h3')
+                for h3 in h3s :
+                    a=h3.find('a')   #on cherche tous les liens compris dans les "h3"
+                    link= a['href'].replace("../../../","")   #permet de supprimer les "../.." en début de chaque lien contenu dans h3
+                    link_c='http://books.toscrape.com/catalogue/' + link
+                    while link_c not in links:
+                        links.append(link_c)
+                next_page = soup.find('li', class_='next')
+                if next_page:
+                    next_url = next_page.find('a')['href']
+                    url = url.rsplit('/', 1)[0] + '/' + next_url  # Construire le nouvel URL de la page suivante
+                    response = requests.get(url)
+                    if response.ok:
+                        soup = BeautifulSoup(response.text, "lxml")
+                        h3s = soup.find_all('h3')
+                        for h3 in h3s :
+                            a=h3.find('a')   
+                            link= a['href'].replace("../../../","")
+                            link_c='http://books.toscrape.com/catalogue/' + link
+                            while link_c not in links:
+                                links.append(link_c)
+    except requests.exceptions.RequestException as error :
+        print(f"Une erreur s'est produite :{error}")  
+        
+    return links
 
 
