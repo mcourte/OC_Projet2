@@ -1,5 +1,4 @@
-#Packages importés
-
+#Modules importés
 
 import all_categories
 
@@ -13,6 +12,5 @@ def dict_cat(url) :
     return dict_category
 
 
-url='http://books.toscrape.com/'
 
 

@@ -1,7 +1,10 @@
+#Packages importés
 import requests
 import os
 import pandas as pd
 from bs4 import BeautifulSoup
+
+#Module importés
 
 import all_categories
 import extraire_donnees

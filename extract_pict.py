@@ -1,8 +1,10 @@
-
+#Packages importés
 import os
 from bs4 import BeautifulSoup
 import requests
 
+
+#Module importés
 import dict_url_cat
 import all_pictures
 import all_categories

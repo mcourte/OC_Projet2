@@ -1,7 +1,5 @@
-#Packages importés
 
-
-# Importation des modules
+# Modules importés
 import urls_by_category
 
 
