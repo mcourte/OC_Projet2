@@ -43,7 +43,7 @@ def create_folder_one_category(url) :
             if response.ok :
                 soup = BeautifulSoup(response.text, 'lxml')
                 div = soup.find('div', class_='page-header action') #permet de trouver les ul de la class indiquée
-                name_cat=div.find('h1').get_text().lower() #Permet de trouver les ul compris dans la liste totale des ul = suppression du premier ul contenu dans a href
+                name_cat=div.find('h1').get_text().replace(" ","-").lower() #Permet de trouver les ul compris dans la liste totale des ul = suppression du premier ul contenu dans a href
                 if not os.path.exists('%s' %name_cat) :  
                     os.makedirs('%s' %name_cat)
     except requests.exceptions.RequestException as error :
