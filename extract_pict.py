@@ -18,17 +18,19 @@ import all_categories
 
 def extract_pict_all_cat(url):
     urls_cat=all_categories.all_cat_urls(url)
-    for cat in urls_cat :
+    for url in urls_cat :
         name_cat=url.replace('http://books.toscrape.com/catalogue/category/books/','').split('_')[0]
-        os.mkdir('%s/Images' %name_cat)           # création du dossier Images de catégories
-        os.chdir('%s/Images' %name_cat)                  #on se place dans le dossier Images de la catégorie
-        dict_urls=dict_url_cat.urls_all_category(url)
-        for i in dict_urls.values():
-            list_url=i
-            for url in list_url :
-                all_pictures.pictures_by_category(i)
+        dict_urls=dict_url_cat.urls_one_category(url)
+        for value in dict_urls.values() :
+            list_urls=value
+        os.chdir('%s' %name_cat) #On se place dans le dossier correspondant à la catégorie
+        os.mkdir('Images')
+        os.chdir('Images')
+        for url in list_urls :
+            all_pictures.pictures_by_category(url)
         os.chdir(os.pardir) # on sort du dossier Images
-        os.chdir(os.pardir)
+        os.chdir(os.pardir) # on sort du dossier Images
+  
 
 def extract_pict_one_cat(url):
     name_cat=url.replace('http://books.toscrape.com/catalogue/category/books/','').split('_')[0]
@@ -53,3 +55,5 @@ def extract_pict_one_book(url):
     all_pictures.pictures_by_category(url)
     os.chdir(os.pardir) # on sort du dossier Images
     os.chdir(os.pardir) 
+
+

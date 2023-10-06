@@ -3,7 +3,7 @@
 import requests
 from bs4 import BeautifulSoup
 import urllib
-
+import urllib3.util.retry 
 
 #Objectif : récuperer les images des livres d'une catégorie
 
@@ -11,7 +11,6 @@ import urllib
 
 
 def pictures_by_category(url) :
-
     book_image=[]
     data_book={}
 
