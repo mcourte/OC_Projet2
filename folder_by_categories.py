@@ -11,7 +11,7 @@ import os
 
 
 def create_folder_category(url) :
-
+    ''' La fonction permet de créer les dossiers pour chaque catégorie'''
     try:
         response = requests.get(url)
         response.raise_for_status()
@@ -33,7 +33,7 @@ def create_folder_category(url) :
 
 
 def create_folder_one_category(url) :
-
+    ''' La fonction permet de créer les dossiers pour une seule catégorie'''
     url=url.replace('\n','')
     try:
         response = requests.get(url)
@@ -42,14 +42,16 @@ def create_folder_one_category(url) :
             soup = BeautifulSoup(response.text, 'lxml')
             if response.ok :
                 soup = BeautifulSoup(response.text, 'lxml')
-                div = soup.find('div', class_='page-header action') #permet de trouver les ul de la class indiquée
-                name_cat=div.find('h1').get_text().replace(" ","-").lower() #Permet de trouver les ul compris dans la liste totale des ul = suppression du premier ul contenu dans a href
+                div = soup.find('div', class_='page-header action') 
+                name_cat=div.find('h1').get_text().replace(" ","-").lower()
                 if not os.path.exists('%s' %name_cat) :  
                     os.makedirs('%s' %name_cat)
+            else : print('Erreur')
     except requests.exceptions.RequestException as error :
         print("Une erreur s'est produite :{error}")
 
 def create_folder_one_book(url) :
+    ''' La fonction permet de créer les dossiers pour une seule catégorie'''
 
     url=url.replace('\n','')
     try:
@@ -62,6 +64,7 @@ def create_folder_one_book(url) :
                 name_cat= soup.find(class_='breadcrumb').find_all('li')[-2].get_text().replace('\n','').lower() #Permet de trouver les li de la classe indiquée : 4 élements - on ne garde que le 2ème
                 if not os.path.exists('%s' %name_cat) :  
                     os.makedirs('%s' %name_cat)
+            else : print('Erreur')
     except requests.exceptions.RequestException as error :
         print("Une erreur s'est produite :{error}")
 

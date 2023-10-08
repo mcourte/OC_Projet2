@@ -3,14 +3,12 @@
 import requests
 from bs4 import BeautifulSoup
 import urllib
-import urllib3.util.retry 
 
 #Objectif : récuperer les images des livres d'une catégorie
 
-#Définition des listes et dictionnaires nécessaires pour le fonctionnement du programme
-
 
 def pictures_by_category(url) :
+    '''La fonction permet de récupérer l'image de chaque livre & lui donner le nom du livre'''
     book_image=[]
     data_book={}
 
@@ -25,8 +23,9 @@ def pictures_by_category(url) :
             name_img=url.replace('http://books.toscrape.com/catalogue/','').replace('/index.html','').split('_')[0].replace('-',' ') # permet de de ne garder que le nom du livre
             name_img=name_img[:255] #limite la longueur du nom du fichier a 255 caractère
             data_book={ name_img : book_image}  #Création d'un dictionnaire avec en keys le nom de l'image et en value son url associée     
-            for key in data_book.keys() :   #pour chacune des key du dictionnaire :
+            for key in data_book.keys() : 
                     pict=urllib.request.urlretrieve(book_image,'%s.jpeg' %name_img)  #Télécharger l'image couverture du livre avec pour nom le nom du livre
+        else : print('Erreur')
     except requests.exceptions.RequestException as error :
         print(f"Une erreur s'est produite :{error}")  
                

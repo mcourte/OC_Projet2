@@ -10,6 +10,7 @@ import choix_categories
 
 #Fonction permettant de convertir le temps d'exécution de secondes en HH:MM:SS
 def convert(seconds):
+    ''' La fonction permet de convertir les secondes en HH/MM/SS afin d'avoir un timing plus clair '''
     min, sec = divmod(seconds, 60)
     hour, min = divmod(min, 60)
     return '%d:%02d:%02d' % (hour, min, sec)
