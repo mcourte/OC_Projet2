@@ -30,7 +30,7 @@ def main ():
         start=time.time()
         folder_by_categories.create_folder_category(url_base)
         extract_data.extract_data_all_categories(url_base)
-        extract_pictures.extract_pict_all_cat(url_base)
+        extract_pictures.extract_picture_all_cat(url_base)
         print('Fin du programme')
         end_time=(time.time()-start)
         print(convert(end_time))
@@ -40,7 +40,7 @@ def main ():
         url_cat=category_choice.choice(url_base)
         folder_by_categories.create_folder_one_category(url_cat)
         extract_data.extract_data_one_category(url_cat)
-        extract_pictures.extract_pict_one_cat(url_cat)
+        extract_pictures.extract_picture_one_cat(url_cat)
         print('Fin du programme')
         end_time=(time.time()-start)
         print(convert(end_time))
@@ -50,7 +50,7 @@ def main ():
         url_book=input("Entrez l'url du livre choisi : ")
         folder_by_categories.create_folder_one_book(url_book)    
         extract_data.extract_data_one_book(url_book)
-        extract_pictures.extract_pict_one_book(url_book)
+        extract_pictures.extract_picture_one_book(url_book)
         print('Fin du programme')
         end_time=(time.time()-start)
         print(convert(end_time))
@@ -62,5 +62,9 @@ def main ():
       print("Choix invalide. Veuillez choisir une option valide.")
 
 
-if __name__=="__main__":
-   main()
+if __name__ == '__main__':
+    
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("Arret du programme")
