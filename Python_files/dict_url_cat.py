@@ -1,6 +1,6 @@
 
 # Modules importés
-import urls_by_category
+import Python_files.urls_by_category as urls_by_category
 
 
 

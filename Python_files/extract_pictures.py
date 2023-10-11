@@ -5,15 +5,15 @@ import requests
 
 
 #Module importés
-import dict_url_cat
-import all_pictures
-import all_categories
+import Python_files.dict_url_cat as dict_url_cat
+import Python_files.all_pictures as all_pictures
+import Python_files.all_category as all_category
 
 
 
 def extract_pict_all_cat(url):
     '''La fonction permet de télécharger toutes les images de toutes les catégories et de les enregistrer dans les dossiers Images associés à chaque dossier de catégories'''
-    urls_cat=all_categories.all_cat_urls(url)
+    urls_cat=all_category.all_cat_urls(url)
     for url in urls_cat :
         name_cat=url.replace('http://books.toscrape.com/catalogue/category/books/','').split('_')[0]
         dict_urls=dict_url_cat.urls_one_category(url)
@@ -57,3 +57,4 @@ def extract_pict_one_book(url):
     os.chdir(os.pardir)  # on sort du dossier de la catégorie
 
 
+ 

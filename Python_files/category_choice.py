@@ -1,8 +1,8 @@
 #Modules importés
-import dict_category
+import Python_files.dict_category as  dict_category
 
 
-def choix(url_base):
+def choice(url_base):
         '''La fonction permet de permettre à l'utilisateur de choisir quel catégorie il veut extraire'''
         category=dict_category.dict_cat(url_base)
         cat=list(category.keys())
@@ -12,12 +12,12 @@ def choix(url_base):
         while True:
            try:
             choice = input("Entrez le numéro de la catégorie que vous souhaitez extraire : ")
-            choix=int(choice) -1
-            if 1<= choix <= len(cat):
-                cat_choisie=cat[choix]
-                print(f"Vous avez choisi d'extraire la catégorie : {cat_choisie}")
+            user_choice=int(choice) -1
+            if 1<= user_choice <= len(cat):
+                cat_choose=cat[user_choice]
+                print(f"Vous avez choisi d'extraire la catégorie : {cat_choose}")
                 url=list(category.values())
-                url_cat=url[choix]
+                url_cat=url[user_choice]
             else:
                   print("Numéro de catégorie invalide.")
             return url_cat

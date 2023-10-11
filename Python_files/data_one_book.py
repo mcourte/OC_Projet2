@@ -4,7 +4,7 @@ import pandas as pd
 
 
 # Fonction pour extraire les données d'une page
-def extraire_donnees(url):
+def extract_book_data(url):
     td_list = []
     th_list = []
     book_data={}
