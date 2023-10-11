@@ -29,7 +29,7 @@ python3 -m venv env
 ```
 
 
-Activez l'environnement virutel
+Activez l'environnement virtuel
 ```
 source env/bin/activate
 ```
