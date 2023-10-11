@@ -2,10 +2,10 @@
 import time
 
 #Modules importés
-import folder_by_categories
-import extract_data
-import extract_pict
-import choix_categories
+from Python_files import folder_by_categories
+from Python_files import extract_data
+from Python_files import extract_pictures
+from Python_files import category_choice
 
 
 #Fonction permettant de convertir le temps d'exécution de secondes en HH:MM:SS
@@ -29,18 +29,18 @@ def main ():
      if choice == "1":
         start=time.time()
         folder_by_categories.create_folder_category(url_base)
-        extract_data.extract_donnees_all_cat(url_base)
-        extract_pict.extract_pict_all_cat(url_base)
+        extract_data.extract_data_all_categories(url_base)
+        extract_pictures.extract_pict_all_cat(url_base)
         print('Fin du programme')
         end_time=(time.time()-start)
         print(convert(end_time))
 
      elif choice == "2":
         start=time.time()
-        url_cat=choix_categories.choix(url_base)
+        url_cat=category_choice.choice(url_base)
         folder_by_categories.create_folder_one_category(url_cat)
-        extract_data.extract_donnees_one_cat(url_cat)
-        extract_pict.extract_pict_one_cat(url_cat)
+        extract_data.extract_data_one_category(url_cat)
+        extract_pictures.extract_pict_one_cat(url_cat)
         print('Fin du programme')
         end_time=(time.time()-start)
         print(convert(end_time))
@@ -49,8 +49,8 @@ def main ():
         start=time.time()
         url_book=input("Entrez l'url du livre choisi : ")
         folder_by_categories.create_folder_one_book(url_book)    
-        extract_data.extract_donnees_one_book(url_book)
-        extract_pict.extract_pict_one_book(url_book)
+        extract_data.extract_data_one_book(url_book)
+        extract_pictures.extract_pict_one_book(url_book)
         print('Fin du programme')
         end_time=(time.time()-start)
         print(convert(end_time))
