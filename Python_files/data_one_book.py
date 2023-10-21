@@ -36,8 +36,7 @@ def extract_book_data(url):
                 product_informations[key]=''.join(c for c in value if c.isdigit() or c =='.')
             if key == 'Availability' :
                 product_informations[key]=''.join(c for c in value if c.isdigit())
-    
-        print(product_informations)
+
         
         # Récupérer la Catégorie du livre
         category = soup.find(class_='breadcrumb').find_all('li')[-2].get_text() #Permet de trouver les li de la classe indiquée : 4 élements - on ne garde que le 2ème
@@ -85,8 +84,4 @@ def extract_book_data(url):
         print("Une erreur s'est produite :{error}")
 
     return books_data 
-
-url="http://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html"
-
-extract_book_data(url)
 
