@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+import re
 
 
 # Fonction pour extraire les données d'une page
@@ -28,6 +29,15 @@ def extract_book_data(url):
         # Créer un dictionnaire avec les informations
         product_informations = {th_list[i]: td_list[i] for i in range(len(th_list))}
         del product_informations['Product Type'], product_informations['Tax'],  product_informations['Number of reviews']  #Permet de supprimer les items qui ne nous interessent pas 
+        for key, value in product_informations.items():
+            if key == 'Price (excl. tax)' :
+                product_informations[key]= ''.join(c for c in value if c.isdigit() or c =='.')
+            if key == 'Price (incl. tax)':
+                product_informations[key]=''.join(c for c in value if c.isdigit() or c =='.')
+            if key == 'Availability' :
+                product_informations[key]=''.join(c for c in value if c.isdigit())
+    
+        print(product_informations)
         
         # Récupérer la Catégorie du livre
         category = soup.find(class_='breadcrumb').find_all('li')[-2].get_text() #Permet de trouver les li de la classe indiquée : 4 élements - on ne garde que le 2ème
@@ -75,4 +85,8 @@ def extract_book_data(url):
         print("Une erreur s'est produite :{error}")
 
     return books_data 
+
+url="http://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html"
+
+extract_book_data(url)
 
