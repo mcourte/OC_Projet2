@@ -1,4 +1,9 @@
 # Programme pour extraire les données et les images des livres de books.toscrape.com
+***Compétences acquises lors de la réalisation de ce projet:***  
+  
+*1. Gérer les données à l'aide du processus Extract Transform Load*  
+*2. Utiliser le contrôle de version avec Git et GitHub*  
+*3. Appliquer les bases de la programmation en Python : gestion de Listes, Dictionnaires, Boucles, Dataframes...*  
 
 ## Etape 1 : Télécharger le code
 
