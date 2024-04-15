@@ -5,12 +5,16 @@
 *2. Utiliser le contrôle de version avec Git et GitHub*  
 *3. Appliquer les bases de la programmation en Python : gestion de Listes, Dictionnaires, Boucles, Dataframes...*  
 
+## But du projet :  
+
+Création d'une application de web-scrapping permettant de collecter l'ensemble des datas d'un site de librairie en ligne.  
+
 ## Etape 1 : Télécharger le code
 
 Cliquer sur le bouton vert "<> Code" puis sur Download ZIP.  
 Extraire l'ensemble des éléments dans le dossier dans lequel vous voulez stockez les datas qui seront téléchargées.  
 
-## Etape 2 ; Installer Python et ouvrir le terminal de commande
+## Etape 2 : Installer Python et ouvrir le terminal de commande
 
 Télécharger [Python](https://www.python.org/downloads/) et [installer-le](https://fr.wikihow.com/installer-Python)  
 
